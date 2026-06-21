@@ -8,7 +8,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-black/30 z-10" />
         {/* Placeholder cho background hình dây cổ trên nền tối sang trọng */}
-        <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1599643478524-fb96519156f2?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center" />
+        <div className="w-full h-full bg-[url('https://cdn.hstatic.net/themes/200000624013/1001449577/14/home_slider_image_1.jpg?v=458')] bg-cover bg-center" />
       </div>
       
       <div className="relative z-20 container mx-auto px-4 text-center">
