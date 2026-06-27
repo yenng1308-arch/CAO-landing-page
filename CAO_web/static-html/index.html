@@ -584,7 +584,7 @@
                     <h3 class="text-2xl font-serif text-emerald mb-2">Thanh Toán Đơn Hàng</h3>
                     <p class="text-neutral-charcoal/70 text-sm mb-6 font-light">Vui lòng quét mã QR dưới đây để hoàn tất thanh toán và kích hoạt lịch tư vấn của bạn.</p>
                     <div class="bg-neutral-warm p-6 inline-block text-left mx-auto mb-6 max-w-xs w-full text-center rounded border border-champagne/30">
-                        <img src="https://printgo.vn/uploads/media/790919/tao-ma-qr-code-san-pham-1_1620927223.jpg" alt="Mã QR Thanh Toán CAO Fine Jewellery" class="mx-auto mb-5 w-full h-auto rounded" />
+                        <img id="qr-image" src="https://vietqr.app/img?bank=ACB&acc=208863989&template=compact&showinfo=true&holder=HUYNH%20THI%20THU%20VAN" alt="Mã QR Thanh Toán CAO Fine Jewellery" class="mx-auto mb-5 w-full h-auto rounded" />
                         <div class="space-y-2 text-left border-t border-champagne/30 pt-4">
                             <p class="text-sm text-neutral-charcoal"><span class="font-medium text-emerald-dark">Mã đơn hàng:</span> <span id="success-order-id" class="font-mono text-emerald font-semibold"></span></p>
                             <p class="text-sm text-neutral-charcoal"><span class="font-medium text-emerald-dark">Số tiền:</span> <span id="success-amount" class="text-emerald font-bold text-lg"></span></p>
@@ -849,6 +849,10 @@
                     body: JSON.stringify(data)
                 });
                 
+                // Cập nhật QR code động: tự động truyền số tiền 19.000đ và mã đơn hàng vào nội dung chuyển khoản
+                const qrUrl = `https://vietqr.app/img?bank=ACB&acc=208863989&template=compact&showinfo=true&holder=HUYNH%20THI%20THU%20VAN&amount=19000&addInfo=${generatedOrderId}`;
+                document.getElementById('qr-image').src = qrUrl;
+
                 document.getElementById('form-container').classList.add('hidden');
                 document.getElementById('success-order-id').innerText = generatedOrderId;
                 document.getElementById('success-amount').innerText = fixedAmount;
