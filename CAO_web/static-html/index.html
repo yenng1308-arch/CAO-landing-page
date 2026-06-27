@@ -193,32 +193,46 @@
     </nav>
 
     <!-- ======================== HERO ======================== -->
-    <section class="relative h-screen w-full flex items-center justify-center bg-emerald text-white overflow-hidden">
+    <section class="relative h-screen w-full bg-emerald text-white overflow-hidden">
+        <!-- Background image -->
         <div class="absolute inset-0 z-0">
-            <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/75 z-10"></div>
             <div class="w-full h-full bg-[url('https://cdn.hstatic.net/themes/200000624013/1001449577/14/home_slider_image_1.jpg?v=458')] bg-cover bg-center"></div>
+            <!-- Gradient: chỉ tối ở phần dưới để chữ nổi, phần trên ảnh hiện rõ -->
+            <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(0,20,16,0.92) 0%, rgba(0,20,16,0.65) 35%, rgba(0,0,0,0.15) 65%, rgba(0,0,0,0.05) 100%);"></div>
         </div>
-        <div class="relative z-20 container mx-auto px-6 text-center fade-in" style="padding-top: 90px;">
-            <p class="text-xs uppercase tracking-[0.35em] mb-5 text-champagne opacity-90" style="text-shadow: 0 1px 6px rgba(0,0,0,0.5);">✦ Fine Jewellery từ CAO ✦</p>
-            <h1 class="font-serif mb-6 text-white" style="font-size: clamp(2.4rem, 6vw, 5rem); letter-spacing: 0.12em; line-height: 1.15; text-shadow: 0 2px 20px rgba(0,0,0,0.7), 0 1px 4px rgba(0,0,0,0.5);">
-                DÂY CỔ GLAMOROSA
-            </h1>
-            <p class="text-xl md:text-2xl italic text-champagne font-light mb-5" style="font-family: '\"Cormorant Garamond\"', serif; letter-spacing: 0.04em; text-shadow: 0 1px 8px rgba(0,0,0,0.6);">
-                Mỗi sắc hoa, một dấu ấn kết nối
-            </p>
-            <div class="w-10 h-[1px] bg-champagne/60 mx-auto mb-6"></div>
-            <p class="max-w-lg mx-auto text-sm md:text-base font-light opacity-80 mb-10 leading-relaxed" style="text-shadow: 0 1px 6px rgba(0,0,0,0.5);">
-                Tác phẩm fine jewellery tôn vinh vẻ đẹp ngàn hoa và hành trình của riêng bạn.
-            </p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#consultation" class="cta-primary px-10 py-4 font-medium tracking-[0.1em] text-sm uppercase w-full sm:w-auto">
-                    Đặt lịch tư vấn riêng
-                </a>
-                <a href="#gallery" class="px-10 py-4 border border-white/50 text-white text-sm tracking-[0.1em] uppercase hover:border-champagne hover:text-champagne transition-colors w-full sm:w-auto flex items-center justify-center gap-2">
-                    Khám phá bộ sưu tập <i class="fa-solid fa-arrow-right text-xs"></i>
-                </a>
+
+        <!-- Content: góc dưới bên trái -->
+        <div class="absolute bottom-0 left-0 right-0 z-20 pb-16 md:pb-20" style="padding-top: 80px;">
+            <div class="container mx-auto px-6 md:px-12 fade-in">
+                <div class="max-w-2xl">
+                    <p class="text-xs uppercase tracking-[0.35em] mb-4 text-champagne" style="text-shadow: 0 1px 4px rgba(0,0,0,0.6);">✦ Fine Jewellery từ CAO ✦</p>
+                    
+                    <h1 class="font-serif text-white mb-3" style="font-size: clamp(2.8rem, 5.5vw, 5.5rem); letter-spacing: 0.06em; line-height: 1.05; text-shadow: 0 2px 16px rgba(0,0,0,0.5);">
+                        DÂY CỔ<br>GLAMOROSA
+                    </h1>
+
+                    <p class="text-lg md:text-xl italic text-champagne font-light mb-5" style="font-family: '&quot;Cormorant Garamond&quot;', serif; letter-spacing: 0.03em; text-shadow: 0 1px 6px rgba(0,0,0,0.5);">
+                        Mỗi sắc hoa, một dấu ấn kết nối
+                    </p>
+
+                    <div class="w-10 h-[1px] bg-champagne/70 mb-5"></div>
+
+                    <p class="text-sm font-light text-white/80 mb-8 leading-relaxed max-w-md" style="text-shadow: 0 1px 6px rgba(0,0,0,0.5);">
+                        Tác phẩm fine jewellery tôn vinh vẻ đẹp ngàn hoa và hành trình của riêng bạn.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-start gap-4">
+                        <a href="#consultation" class="cta-primary px-8 py-3.5 font-medium tracking-[0.1em] text-sm uppercase">
+                            Đặt lịch tư vấn riêng
+                        </a>
+                        <a href="#gallery" class="px-8 py-3.5 border border-white/50 text-white text-sm tracking-[0.1em] uppercase hover:border-champagne hover:text-champagne transition-colors flex items-center gap-2">
+                            Khám phá bộ sưu tập <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
+
         <!-- Scroll indicator -->
         <div class="scroll-indicator">
             <span class="text-white/50 text-xs tracking-widest uppercase">Khám phá</span>
