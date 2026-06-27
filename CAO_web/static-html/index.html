@@ -193,52 +193,84 @@
     </nav>
 
     <!-- ======================== HERO ======================== -->
-    <section class="relative h-screen w-full bg-emerald text-white overflow-hidden">
-        <!-- Background image -->
-        <div class="absolute inset-0 z-0">
-            <div class="w-full h-full bg-[url('https://cdn.hstatic.net/themes/200000624013/1001449577/14/home_slider_image_1.jpg?v=458')] bg-cover bg-center"></div>
-            <!-- Gradient: chỉ tối ở phần dưới để chữ nổi, phần trên ảnh hiện rõ -->
-            <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(0,20,16,0.92) 0%, rgba(0,20,16,0.65) 35%, rgba(0,0,0,0.15) 65%, rgba(0,0,0,0.05) 100%);"></div>
-        </div>
+    <section class="relative w-full text-white overflow-hidden" style="min-height: 100vh;">
+        <div class="flex flex-col md:flex-row" style="min-height: 100vh;">
 
-        <!-- Content: góc dưới bên trái -->
-        <div class="absolute bottom-0 left-0 right-0 z-20 pb-16 md:pb-20" style="padding-top: 80px;">
-            <div class="container mx-auto px-6 md:px-12 fade-in">
-                <div class="max-w-2xl">
-                    <p class="text-xs uppercase tracking-[0.35em] mb-4 text-champagne" style="text-shadow: 0 1px 4px rgba(0,0,0,0.6);">✦ Fine Jewellery từ CAO ✦</p>
-                    
-                    <h1 class="font-serif text-white mb-3" style="font-size: clamp(2.8rem, 5.5vw, 5.5rem); letter-spacing: 0.06em; line-height: 1.05; text-shadow: 0 2px 16px rgba(0,0,0,0.5);">
+            <!-- TRÁI: Nền emerald tối — nội dung text -->
+            <div class="flex flex-col justify-center bg-emerald-dark px-8 md:px-16 py-24 md:py-0 w-full md:w-1/2 relative" style="padding-top: 100px;">
+                <!-- Logo watermark mờ -->
+                <div class="absolute top-0 left-0 right-0 bottom-0 opacity-5 pointer-events-none select-none flex items-center justify-center">
+                    <span class="font-serif text-white" style="font-size: 14vw; letter-spacing: 0.15em;">CAO</span>
+                </div>
+
+                <div class="relative z-10 max-w-md fade-in">
+                    <p class="text-xs uppercase tracking-[0.35em] mb-6 text-champagne">✦ Fine Jewellery từ CAO ✦</p>
+
+                    <h1 class="font-serif text-white mb-4" style="font-size: clamp(3rem, 5vw, 5.5rem); letter-spacing: 0.08em; line-height: 1.0;">
                         DÂY CỔ<br>GLAMOROSA
                     </h1>
 
-                    <p class="text-lg md:text-xl italic text-champagne font-light mb-5" style="font-family: '&quot;Cormorant Garamond&quot;', serif; letter-spacing: 0.03em; text-shadow: 0 1px 6px rgba(0,0,0,0.5);">
+                    <p class="text-lg italic text-champagne font-light mb-6" style="font-family: '&quot;Cormorant Garamond&quot;', serif; letter-spacing: 0.04em;">
                         Mỗi sắc hoa, một dấu ấn kết nối
                     </p>
 
-                    <div class="w-10 h-[1px] bg-champagne/70 mb-5"></div>
+                    <div class="w-10 h-px bg-champagne/60 mb-6"></div>
 
-                    <p class="text-sm font-light text-white/80 mb-8 leading-relaxed max-w-md" style="text-shadow: 0 1px 6px rgba(0,0,0,0.5);">
-                        Tác phẩm fine jewellery tôn vinh vẻ đẹp ngàn hoa và hành trình của riêng bạn.
+                    <p class="text-sm font-light text-white/70 mb-10 leading-relaxed">
+                        Tác phẩm fine jewellery tôn vinh vẻ đẹp ngàn hoa và hành trình của riêng bạn. Chế tác từ vàng 18K và đá quý tinh tuyển.
                     </p>
 
-                    <div class="flex flex-col sm:flex-row items-start gap-4">
-                        <a href="#consultation" class="cta-primary px-8 py-3.5 font-medium tracking-[0.1em] text-sm uppercase">
-                            Đặt lịch tư vấn riêng
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#consultation" class="cta-primary px-8 py-4 font-medium tracking-[0.1em] text-sm uppercase text-center">
+                            Đặt lịch tư vấn
                         </a>
-                        <a href="#gallery" class="px-8 py-3.5 border border-white/50 text-white text-sm tracking-[0.1em] uppercase hover:border-champagne hover:text-champagne transition-colors flex items-center gap-2">
-                            Khám phá bộ sưu tập <i class="fa-solid fa-arrow-right text-xs"></i>
+                        <a href="#gallery" class="px-8 py-4 border border-white/30 text-white/80 text-sm tracking-[0.1em] uppercase hover:border-champagne hover:text-champagne transition-colors flex items-center justify-center gap-2">
+                            Xem bộ sưu tập <i class="fa-solid fa-arrow-right text-xs"></i>
                         </a>
                     </div>
+
+                    <!-- Stats -->
+                    <div class="flex gap-8 mt-12 pt-8 border-t border-white/10">
+                        <div>
+                            <p class="font-serif text-champagne text-2xl">18K</p>
+                            <p class="text-white/50 text-xs uppercase tracking-wider mt-1">Vàng tinh khiết</p>
+                        </div>
+                        <div class="border-l border-white/10 pl-8">
+                            <p class="font-serif text-champagne text-2xl">GIA</p>
+                            <p class="text-white/50 text-xs uppercase tracking-wider mt-1">Chứng nhận quốc tế</p>
+                        </div>
+                        <div class="border-l border-white/10 pl-8">
+                            <p class="font-serif text-champagne text-2xl">24h</p>
+                            <p class="text-white/50 text-xs uppercase tracking-wider mt-1">Phản hồi tư vấn</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHẢI: Ảnh trang sức — không có chữ đè -->
+            <div class="w-full md:w-1/2 relative" style="min-height: 55vw; max-height: 100vh;">
+                <img 
+                    src="https://cdn.hstatic.net/themes/200000624013/1001449577/14/home_slider_image_1.jpg?v=458"
+                    alt="Dây cổ Glamorosa – CAO Fine Jewellery"
+                    class="w-full h-full object-cover"
+                    style="min-height: 380px;"
+                >
+                <!-- Viền champagne tinh tế bên trong ảnh -->
+                <div class="absolute inset-4 border border-champagne/20 pointer-events-none hidden md:block"></div>
+                <!-- Badge góc phải -->
+                <div class="absolute bottom-6 right-6 bg-emerald-dark/80 backdrop-blur-sm px-4 py-2 border border-champagne/30">
+                    <p class="text-champagne text-xs uppercase tracking-widest font-medium">Fine Jewellery</p>
                 </div>
             </div>
         </div>
 
-        <!-- Scroll indicator -->
-        <div class="scroll-indicator">
-            <span class="text-white/50 text-xs tracking-widest uppercase">Khám phá</span>
+        <!-- Scroll indicator (chỉ hiện trên desktop) -->
+        <div class="scroll-indicator hidden md:flex">
+            <span class="text-white/40 text-xs tracking-widest uppercase">Khám phá</span>
             <i class="fa-solid fa-chevron-down text-champagne text-sm"></i>
         </div>
     </section>
+
 
     <!-- ======================== PRODUCT STORY ======================== -->
     <section class="py-24 md:py-32 bg-neutral-warm">
