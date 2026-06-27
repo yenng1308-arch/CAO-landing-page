@@ -46,7 +46,14 @@ function doPost(e) {
     var sendZalo = data.sendZalo || "Chờ gửi";
     var note = data.note || "";
 
-    // Ghi dữ liệu vào cột từ A đến H
+    // Tạo Mã đơn hàng ngẫu nhiên gồm chữ AI và 10 số ngẫu nhiên
+    var randomNumbers = Math.floor(1000000000 + Math.random() * 9000000000).toString();
+    var orderId = "AI" + randomNumbers;
+    
+    // Gắn cố định số tiền
+    var amount = "19.000đ";
+
+    // Ghi dữ liệu vào cột từ A đến J (10 cột)
     sheet.appendRow([
       timestamp, 
       name, 
@@ -55,7 +62,9 @@ function doPost(e) {
       payment, 
       sendEmail, 
       sendZalo, 
-      note
+      note,
+      orderId,
+      amount
     ]);
 
     return ContentService.createTextOutput(JSON.stringify({ 
