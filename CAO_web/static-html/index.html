@@ -217,25 +217,37 @@
                 <div class="w-12 h-[1px] bg-champagne mx-auto mb-6"></div>
                 <p class="text-neutral-charcoal/80 font-light">Để lại thông tin, đội ngũ CAO sẽ liên hệ trong vòng 24 giờ để gợi ý phiên bản phù hợp nhất. Không bắt buộc mua hàng.</p>
             </div>
-            <form onsubmit="submitConsultationForm(event)" class="space-y-6 bg-white p-8 shadow-sm">
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div>
-                        <label class="block text-sm font-medium text-emerald-dark mb-2">Họ & Tên</label>
-                        <input name="fullname" required type="text" class="w-full p-4 bg-neutral-warm border border-transparent focus:border-champagne outline-none" placeholder="Nguyễn Văn A">
+            <div id="form-container">
+                <form id="consultation-form" onsubmit="submitConsultationForm(event)" class="space-y-6 bg-white p-8 shadow-sm">
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-emerald-dark mb-2">Họ & Tên</label>
+                            <input name="fullname" required type="text" class="w-full p-4 bg-neutral-warm border border-transparent focus:border-champagne outline-none" placeholder="Nguyễn Văn A">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-emerald-dark mb-2">Số điện thoại</label>
+                            <input name="phone" required type="tel" class="w-full p-4 bg-neutral-warm border border-transparent focus:border-champagne outline-none" placeholder="0901234567">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-emerald-dark mb-2">Email</label>
+                            <input name="email" required type="email" class="w-full p-4 bg-neutral-warm border border-transparent focus:border-champagne outline-none" placeholder="nguyenvana@gmail.com">
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-emerald-dark mb-2">Số điện thoại</label>
-                        <input name="phone" required type="tel" class="w-full p-4 bg-neutral-warm border border-transparent focus:border-champagne outline-none" placeholder="0901234567">
+                    <div class="text-center pt-4">
+                        <button type="submit" class="px-12 py-4 bg-emerald text-white font-medium tracking-wide hover:bg-emerald-light transition-colors w-full sm:w-auto">Gửi Yêu Cầu Tư Vấn</button>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-emerald-dark mb-2">Email</label>
-                        <input name="email" required type="email" class="w-full p-4 bg-neutral-warm border border-transparent focus:border-champagne outline-none" placeholder="nguyenvana@gmail.com">
-                    </div>
+                </form>
+            </div>
+            
+            <div id="success-message" class="hidden p-8 bg-white text-center shadow-sm border border-champagne/30 fade-in">
+                <h3 class="text-2xl font-serif text-emerald mb-4">Gửi Yêu Cầu Thành Công</h3>
+                <p class="text-neutral-charcoal/80 mb-6">Yêu cầu tư vấn của bạn đã được tiếp nhận. Chuyên gia của CAO sẽ sớm liên hệ với bạn.</p>
+                <div class="bg-neutral-warm/30 p-6 rounded-lg shadow-sm border border-champagne/50 inline-block text-left mx-auto">
+                    <p class="text-neutral-charcoal mb-2"><span class="font-semibold">Mã đơn hàng:</span> <span id="success-order-id" class="text-emerald font-mono text-lg"></span></p>
+                    <p class="text-neutral-charcoal mb-2"><span class="font-semibold">Số tiền thanh toán:</span> <span id="success-amount" class="text-emerald font-bold text-lg"></span></p>
+                    <p class="text-sm text-neutral-charcoal/70 mt-4 italic">* Vui lòng ghi chú mã đơn hàng khi chuyển khoản.</p>
                 </div>
-                <div class="text-center pt-4">
-                    <button type="submit" class="px-12 py-4 bg-emerald text-white font-medium tracking-wide hover:bg-emerald-light transition-colors w-full sm:w-auto">Gửi Yêu Cầu Tư Vấn</button>
-                </div>
-            </form>
+            </div>
         </div>
     </section>
 
@@ -359,6 +371,9 @@
             const phone = formData.get('phone');
             const email = formData.get('email');
 
+            const generatedOrderId = "AI" + Math.floor(1000000000 + Math.random() * 9000000000).toString();
+            const fixedAmount = "19.000đ";
+
             const data = {
                 name: fullname,
                 phone: phone,
@@ -366,7 +381,9 @@
                 payment: "Chưa thanh toán",
                 sendEmail: "Chờ gửi",
                 sendZalo: "Chờ gửi",
-                note: "Đăng ký từ trang Landing Page tĩnh"
+                note: "Đăng ký từ trang Landing Page tĩnh",
+                orderId: generatedOrderId,
+                amount: fixedAmount
             };
 
             // URL Apps Script Web App của bạn
@@ -383,7 +400,13 @@
                     body: JSON.stringify(data)
                 });
                 
-                alert('Cảm ơn bạn! Yêu cầu tư vấn đã được ghi nhận.');
+                // Hiển thị thông báo thành công
+                document.getElementById('form-container').classList.add('hidden');
+                document.getElementById('success-order-id').innerText = generatedOrderId;
+                document.getElementById('success-amount').innerText = fixedAmount;
+                const successMessage = document.getElementById('success-message');
+                successMessage.classList.remove('hidden');
+                
                 form.reset();
             } catch (error) {
                 console.error('Lỗi gửi form:', error);

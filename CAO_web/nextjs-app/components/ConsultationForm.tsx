@@ -7,6 +7,7 @@ export default function ConsultationForm() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [orderInfo, setOrderInfo] = useState<{orderId: string, amount: string} | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,6 +24,9 @@ export default function ConsultationForm() {
 
     const mergedNote = `Kênh liên hệ: ${contactChannel}. Thời gian: ${preferredTime}.${notes ? ' Ghi chú thêm: ' + notes : ''}`;
 
+    const generatedOrderId = "AI" + Math.floor(1000000000 + Math.random() * 9000000000).toString();
+    const fixedAmount = "19.000đ";
+
     const data = {
       name: fullname,
       phone: phone,
@@ -30,7 +34,9 @@ export default function ConsultationForm() {
       payment: "Chưa thanh toán",
       sendEmail: "Chờ gửi",
       sendZalo: contactChannel === "Zalo" ? "Cần gửi Zalo" : "Chờ gửi",
-      note: mergedNote
+      note: mergedNote,
+      orderId: generatedOrderId,
+      amount: fixedAmount
     };
 
     // URL Apps Script Web App của bạn
@@ -47,6 +53,7 @@ export default function ConsultationForm() {
         body: JSON.stringify(data),
       });
 
+      setOrderInfo({ orderId: generatedOrderId, amount: fixedAmount });
       setSubmitted(true);
     } catch (error) {
       console.error("Lỗi gửi dữ liệu:", error);
@@ -73,8 +80,15 @@ export default function ConsultationForm() {
             animate={{ opacity: 1 }}
             className="p-8 bg-neutral-warm text-center border border-champagne/30"
           >
-            <h3 className="text-2xl font-serif text-emerald mb-2">Cảm ơn bạn</h3>
-            <p className="text-neutral-charcoal/80">Yêu cầu tư vấn của bạn đã được gửi thành công. Chuyên gia của CAO sẽ sớm liên hệ.</p>
+            <h3 className="text-2xl font-serif text-emerald mb-4">Gửi Yêu Cầu Thành Công</h3>
+            <p className="text-neutral-charcoal/80 mb-6">Yêu cầu tư vấn của bạn đã được tiếp nhận. Chuyên gia của CAO sẽ sớm liên hệ với bạn.</p>
+            {orderInfo && (
+              <div className="bg-white p-6 rounded-lg shadow-sm border border-champagne/50 inline-block text-left mx-auto">
+                <p className="text-neutral-charcoal mb-2"><span className="font-semibold">Mã đơn hàng:</span> <span className="text-emerald font-mono text-lg">{orderInfo.orderId}</span></p>
+                <p className="text-neutral-charcoal mb-2"><span className="font-semibold">Số tiền thanh toán:</span> <span className="text-emerald font-bold text-lg">{orderInfo.amount}</span></p>
+                <p className="text-sm text-neutral-charcoal/70 mt-4 italic">* Vui lòng ghi chú mã đơn hàng khi chuyển khoản.</p>
+              </div>
+            )}
           </motion.div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
