@@ -52,7 +52,7 @@ export default function ConsultationForm() {
     };
 
     // URL Apps Script Web App của bạn
-    const APPS_SCRIPT_URL = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL || "https://script.google.com/macros/s/AKfycbwKMl4axpK_dc9Ud9RxxZgDhqRzKCvOnB7bCai4KBwUtkSsFdUEfWVP1RgAS7WVVJSI/exec";
+    const APPS_SCRIPT_URL = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL || "https://script.google.com/macros/s/AKfycby7s63-QdXDGv_Ow_2MQ5A_TOSiv01ygYH654fpafcCs84rJNF0EXq3iJCh2BE4Fqc/exec";
 
     try {
       // Sử dụng mode: "no-cors" và text/plain để tránh preflight OPTIONS từ trình duyệt
