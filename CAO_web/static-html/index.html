@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dây cổ Glamorosa – Fine Jewellery Hoa Kết Nối | CAO Fine Jewellery</title>
-    <meta name="description" content="Khám phá dây cổ Glamorosa từ CAO Fine Jewellery – tác phẩm fine jewellery lấy cảm hứng từ sắc hoa và nhịp kết nối.">
+    <meta name="description" content="Khám phá dây cổ Glamorosa từ CAO Fine Jewellery – tác phẩm fine jewellery lấy cảm hứng từ sắc hoa và nhịp kết nối. Vàng 18K, đá quý tinh tuyển.">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome cho Icon -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Tailwind Config -->
@@ -38,229 +38,534 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #F7F5F0; color: #1F2225; }
         h1, h2, h3, h4, h5, h6, .font-serif { font-family: '"Cormorant Garamond"', serif; font-weight: 300; letter-spacing: 0.05em; }
-        
-        /* Fade In Animation */
-        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+
+        /* Fade In */
+        .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.85s ease-out, transform 0.85s ease-out; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* Sticky Nav */
+        #main-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+            transition: background 0.4s ease, box-shadow 0.4s ease, padding 0.3s ease;
+            padding: 24px 0;
+        }
+        #main-nav.scrolled {
+            background: rgba(0, 36, 30, 0.97);
+            box-shadow: 0 2px 24px rgba(0,0,0,0.25);
+            padding: 12px 0;
+            backdrop-filter: blur(12px);
+        }
+        .nav-link {
+            position: relative;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.75);
+            transition: color 0.25s;
+        }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
+            height: 1px; background: #D5B98A;
+            transform: scaleX(0); transition: transform 0.3s ease;
+        }
+        .nav-link:hover { color: #D5B98A; }
+        .nav-link:hover::after { transform: scaleX(1); }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 20;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* Gallery hover */
+        .gallery-item { position: relative; overflow: hidden; cursor: zoom-in; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); }
+        .gallery-item:hover img { transform: scale(1.08); }
+        .gallery-caption {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,36,30,0.85) 0%, transparent 55%);
+            opacity: 0; transition: opacity 0.4s ease;
+            display: flex; align-items: flex-end; padding: 24px;
+        }
+        .gallery-item:hover .gallery-caption { opacity: 1; }
+        .gallery-caption-text { color: white; font-family: '"Cormorant Garamond"', serif; font-size: 1.1rem; letter-spacing: 0.05em; }
+        .gallery-caption-sub { color: #D5B98A; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 3px; }
+
+        /* Form styling */
+        .form-input {
+            width: 100%; padding: 14px 16px 14px 44px;
+            background: #F7F5F0; border: 1px solid transparent;
+            outline: none; font-size: 0.95rem; color: #1F2225;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+        .form-input:focus {
+            border-color: #D5B98A;
+            box-shadow: 0 0 0 3px rgba(213,185,138,0.15);
+        }
+        .form-input-wrap { position: relative; }
+        .form-input-icon {
+            position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+            color: #B89B6D; font-size: 0.85rem; pointer-events: none;
+        }
+        .submit-btn {
+            background: linear-gradient(135deg, #D5B98A 0%, #B89B6D 100%);
+            color: #00241E; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+            padding: 16px 48px; border: none; cursor: pointer;
+            font-size: 0.85rem; font-family: 'Inter', sans-serif;
+            transition: opacity 0.25s, transform 0.2s, box-shadow 0.25s;
+            box-shadow: 0 4px 20px rgba(213,185,138,0.35);
+        }
+        .submit-btn:hover { opacity: 0.92; transform: translateY(-1px); box-shadow: 0 6px 28px rgba(213,185,138,0.45); }
+        .submit-btn:active { transform: translateY(0); }
+        .submit-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+        /* Testimonial card */
+        .testimonial-card {
+            background: white; padding: 32px; border-left: 3px solid #D5B98A;
+            position: relative;
+        }
+        .testimonial-card::before {
+            content: '\201C'; font-family: '"Cormorant Garamond"', serif;
+            font-size: 5rem; color: #D5B98A; opacity: 0.25;
+            position: absolute; top: -8px; left: 20px; line-height: 1;
+        }
+
+        /* CTA shimmer */
+        .cta-primary {
+            position: relative; overflow: hidden;
+            background: #D5B98A; color: #00241E;
+        }
+        .cta-primary::after {
+            content: ''; position: absolute;
+            top: -50%; left: -75%; width: 50%; height: 200%;
+            background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.3) 50%, transparent 60%);
+            transform: skewX(-15deg);
+            animation: shimmer 3.5s infinite;
+        }
+        @keyframes shimmer { 0% { left: -75%; } 100% { left: 175%; } }
+
+        /* Section divider */
+        .section-divider { width: 48px; height: 1px; background: #D5B98A; }
+        .section-divider-center { margin: 0 auto; }
+
+        /* Mobile nav toggle */
+        #mobile-menu { display: none; }
+        #mobile-menu.open { display: flex; }
+        @media (max-width: 768px) {
+            .nav-desktop-links { display: none; }
+        }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Hero Section -->
+    <!-- ======================== STICKY NAV ======================== -->
+    <nav id="main-nav">
+        <div class="container mx-auto px-6 flex items-center justify-between">
+            <a href="#" class="font-serif text-white text-xl tracking-[0.2em] hover:text-champagne transition-colors">
+                CAO
+            </a>
+            <!-- Desktop links -->
+            <div class="nav-desktop-links hidden md:flex items-center gap-8">
+                <a href="#highlights" class="nav-link">Thiết Kế</a>
+                <a href="#gallery" class="nav-link">Bộ Sưu Tập</a>
+                <a href="#consultation" class="nav-link">Tư Vấn</a>
+                <a href="#consultation" class="ml-4 px-5 py-2 border border-champagne text-champagne text-xs tracking-widest uppercase hover:bg-champagne hover:text-emerald-dark transition-colors">
+                    Đặt Lịch
+                </a>
+            </div>
+            <!-- Mobile hamburger -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-white p-2">
+                <i class="fa-solid fa-bars text-lg"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden flex-col items-center gap-5 py-6 bg-emerald-dark border-t border-white/10 md:hidden">
+            <a href="#highlights" class="nav-link" onclick="closeMobileMenu()">Thiết Kế</a>
+            <a href="#gallery" class="nav-link" onclick="closeMobileMenu()">Bộ Sưu Tập</a>
+            <a href="#consultation" class="nav-link" onclick="closeMobileMenu()">Tư Vấn</a>
+            <a href="#consultation" onclick="closeMobileMenu()" class="px-6 py-2 border border-champagne text-champagne text-xs tracking-widest uppercase">Đặt Lịch</a>
+        </div>
+    </nav>
+
+    <!-- ======================== HERO ======================== -->
     <section class="relative h-screen w-full flex items-center justify-center bg-emerald text-white overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <div class="absolute inset-0 bg-black/40 z-10"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60 z-10"></div>
             <div class="w-full h-full bg-[url('https://cdn.hstatic.net/themes/200000624013/1001449577/14/home_slider_image_1.jpg?v=458')] bg-cover bg-center"></div>
         </div>
-        <div class="relative z-20 container mx-auto px-4 text-center fade-in">
-            <p class="text-sm uppercase tracking-[0.2em] mb-4 text-champagne-light">Fine Jewellery từ CAO</p>
-            <h1 class="text-5xl md:text-7xl font-serif mb-6">DÂY CỔ GLAMOROSA<br><span class="block text-3xl md:text-5xl mt-4 italic text-champagne">Mỗi sắc hoa, một dấu ấn kết nối</span></h1>
-            <p class="max-w-2xl mx-auto text-lg md:text-xl font-light opacity-90 mb-10">Một tác phẩm fine jewellery tôn vinh vẻ đẹp ngàn hoa và hành trình của riêng bạn.</p>
+        <div class="relative z-20 container mx-auto px-4 text-center fade-in" style="padding-top: 80px;">
+            <p class="text-xs uppercase tracking-[0.35em] mb-5 text-champagne-light opacity-90">✦ Fine Jewellery từ CAO ✦</p>
+            <h1 class="text-6xl md:text-8xl font-serif mb-6 leading-none tracking-[0.08em]">
+                DÂY CỔ GLAMOROSA
+                <span class="block text-3xl md:text-4xl mt-5 italic text-champagne font-light tracking-normal">
+                    Mỗi sắc hoa, một dấu ấn kết nối
+                </span>
+            </h1>
+            <p class="max-w-xl mx-auto text-base md:text-lg font-light opacity-80 mb-12 leading-relaxed">
+                Tác phẩm fine jewellery tôn vinh vẻ đẹp ngàn hoa<br class="hidden md:block"> và hành trình của riêng bạn.
+            </p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#consultation" class="px-8 py-4 bg-champagne text-emerald-dark font-medium tracking-wide hover:bg-champagne-light transition-colors w-full sm:w-auto">Đặt lịch tư vấn riêng</a>
-                <a href="#gallery" class="px-8 py-4 border border-white/30 hover:border-white transition-colors w-full sm:w-auto">Xem chi tiết dây cổ</a>
+                <a href="#consultation" class="cta-primary px-10 py-4 font-medium tracking-[0.1em] text-sm uppercase w-full sm:w-auto">
+                    Đặt lịch tư vấn riêng
+                </a>
+                <a href="#gallery" class="px-10 py-4 border border-white/40 text-white text-sm tracking-[0.1em] uppercase hover:border-champagne hover:text-champagne transition-colors w-full sm:w-auto flex items-center justify-center gap-2">
+                    Khám phá bộ sưu tập <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
             </div>
         </div>
-    </section>
-
-    <!-- Product Story -->
-    <section class="py-24 md:py-32 bg-neutral-warm">
-        <div class="container mx-auto px-4 max-w-4xl text-center fade-in">
-            <h2 class="text-3xl md:text-4xl font-serif text-emerald-dark mb-8">Câu chuyện Glamorosa</h2>
-            <div class="w-12 h-[1px] bg-champagne mx-auto mb-12"></div>
-            <p class="text-lg md:text-xl leading-relaxed text-neutral-charcoal/80 mb-8 font-light">Glamorosa mở ra một bản hòa ca giữa con người và vẻ đẹp phong phú của thiên nhiên – nơi mỗi sắc hoa được chắt lọc thành đường nét trang sức tinh xảo. Từ thiết kế đến chế tác, mọi chi tiết đều hướng đến một điều: tôn vinh vẻ đẹp nội tâm đang rực rỡ bên trong bạn.</p>
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator">
+            <span class="text-white/50 text-xs tracking-widest uppercase">Khám phá</span>
+            <i class="fa-solid fa-chevron-down text-champagne text-sm"></i>
         </div>
     </section>
 
-    <!-- Product Highlights -->
+    <!-- ======================== PRODUCT STORY ======================== -->
+    <section class="py-24 md:py-32 bg-neutral-warm">
+        <div class="container mx-auto px-4 max-w-4xl fade-in">
+            <div class="text-center mb-10">
+                <p class="text-xs uppercase tracking-[0.2em] text-champagne mb-4">Câu Chuyện</p>
+                <h2 class="text-3xl md:text-4xl font-serif text-emerald-dark mb-6">Câu chuyện Glamorosa</h2>
+                <div class="section-divider section-divider-center"></div>
+            </div>
+            <p class="text-lg md:text-xl leading-loose text-neutral-charcoal/75 mb-10 font-light text-center">
+                Glamorosa mở ra một bản hòa ca giữa con người và vẻ đẹp phong phú của thiên nhiên – nơi mỗi sắc hoa được chắt lọc thành đường nét trang sức tinh xảo. Từ thiết kế đến chế tác, mọi chi tiết đều hướng đến một điều: tôn vinh vẻ đẹp nội tâm đang rực rỡ bên trong bạn.
+            </p>
+            <!-- Pull quote -->
+            <blockquote class="border-l-2 border-champagne pl-8 py-2 text-xl md:text-2xl font-serif italic text-emerald text-center max-w-2xl mx-auto fade-in" style="transition-delay:0.2s">
+                "Không chỉ là trang sức — đây là dấu ấn riêng của bạn."
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- ======================== PRODUCT HIGHLIGHTS ======================== -->
     <section id="highlights" class="py-24 bg-white">
         <div class="container mx-auto px-4 max-w-6xl">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                <div class="aspect-[4/5] bg-neutral-warm relative rounded-sm overflow-hidden fade-in">
-                    <!-- Ảnh thiết kế chất liệu tinh tuyển -->
-                    <div class="absolute inset-0 bg-[url('https://cdn.hstatic.net/themes/200000624013/1001449577/14/home_about_img.jpg?v=458')] bg-cover bg-center"></div>
+                <div class="aspect-[4/5] bg-neutral-warm relative rounded-sm overflow-hidden fade-in group">
+                    <div class="absolute inset-0 bg-[url('https://cdn.hstatic.net/themes/200000624013/1001449577/14/home_about_img.jpg?v=458')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-emerald-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
                 
-                <div class="space-y-12 fade-in" style="transition-delay: 0.2s">
+                <div class="space-y-10 fade-in" style="transition-delay: 0.2s">
                     <div>
+                        <p class="text-xs uppercase tracking-[0.2em] text-champagne mb-3">Thiết Kế Độc Quyền</p>
                         <h2 class="text-3xl font-serif text-emerald-dark mb-4">Điểm Nhấn Thiết Kế</h2>
-                        <div class="w-12 h-[1px] bg-champagne"></div>
+                        <div class="section-divider"></div>
                     </div>
 
-                    <div class="space-y-8">
-                        <div>
-                            <h3 class="text-xl font-serif text-emerald mb-2">Sắc Hoa Kết Nối</h3>
-                            <p class="text-neutral-charcoal/70 leading-relaxed font-light">Ngôn ngữ thiết kế hoa kết nối độc đáo: mỗi chi tiết lấy cảm hứng từ vẻ đẹp ngàn hoa, tạo nên một bố cục mềm mại nhưng có trật tự, dễ nhận diện.</p>
+                    <div class="space-y-7">
+                        <div class="flex gap-4">
+                            <div class="mt-1 w-8 h-8 rounded-full bg-champagne/20 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-spa text-champagne text-xs"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-serif text-emerald mb-1">Sắc Hoa Kết Nối</h3>
+                                <p class="text-neutral-charcoal/65 leading-relaxed font-light text-sm">Ngôn ngữ thiết kế hoa kết nối độc đáo: mỗi chi tiết lấy cảm hứng từ vẻ đẹp ngàn hoa, tạo nên bố cục mềm mại nhưng có trật tự, dễ nhận diện.</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="text-xl font-serif text-emerald mb-2">Điểm Nhấn Ánh Sáng</h3>
-                            <p class="text-neutral-charcoal/70 leading-relaxed font-light">Đường cong dây cổ ôm nhẹ theo dáng cổ, mỗi cụm hoa là một khoảnh khắc ánh sáng khác nhau – tựa như những cảm xúc phong phú bên trong bạn.</p>
+                        <div class="flex gap-4">
+                            <div class="mt-1 w-8 h-8 rounded-full bg-champagne/20 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-regular fa-sun text-champagne text-xs"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-serif text-emerald mb-1">Điểm Nhấn Ánh Sáng</h3>
+                                <p class="text-neutral-charcoal/65 leading-relaxed font-light text-sm">Đường cong dây cổ ôm nhẹ theo dáng cổ, mỗi cụm hoa là một khoảnh khắc ánh sáng khác nhau – tựa như những cảm xúc phong phú bên trong bạn.</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="text-xl font-serif text-emerald mb-2">Chất Liệu Tinh Tuyển</h3>
-                            <p class="text-neutral-charcoal/70 leading-relaxed font-light">Chế tác từ vàng 18K và đá quý tinh tuyển, bảo chứng cho chất lượng và giá trị thẩm mỹ bền vững qua năm tháng.</p>
+                        <div class="flex gap-4">
+                            <div class="mt-1 w-8 h-8 rounded-full bg-champagne/20 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-gem text-champagne text-xs"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-serif text-emerald mb-1">Chất Liệu Tinh Tuyển</h3>
+                                <p class="text-neutral-charcoal/65 leading-relaxed font-light text-sm">Chế tác từ vàng 18K (75% tinh khiết) và đá quý được chứng nhận quốc tế, bảo chứng cho chất lượng và giá trị thẩm mỹ bền vững.</p>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="pt-4">
-                        <a href="#gallery" class="text-sm uppercase tracking-widest text-emerald font-medium border-b border-emerald pb-1 hover:text-emerald-light transition-colors">
-                            Xem tất cả góc nhìn
-                        </a>
-                    </div>
+                    <a href="#gallery" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-emerald font-medium border-b border-emerald pb-1 hover:text-champagne hover:border-champagne transition-colors">
+                        Xem tất cả góc nhìn <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Visual Gallery -->
-    <section id="gallery" class="py-24 bg-white">
+    <!-- ======================== VISUAL GALLERY ======================== -->
+    <section id="gallery" class="py-24 bg-neutral-warm/50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16 fade-in">
+                <p class="text-xs uppercase tracking-[0.2em] text-champagne mb-4">Bộ Sưu Tập</p>
                 <h2 class="text-3xl font-serif text-emerald-dark mb-4">Góc Nhìn Nghệ Thuật</h2>
-                <div class="w-12 h-[1px] bg-champagne mx-auto"></div>
+                <div class="section-divider section-divider-center"></div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 max-w-6xl mx-auto">
-                <div class="aspect-square bg-[url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=1000')] bg-cover bg-center fade-in"></div>
-                <div class="aspect-square bg-[url('https://images.unsplash.com/photo-1599643477877-530eb83abc8e?q=80&w=1000')] bg-cover bg-center fade-in" style="transition-delay: 0.2s"></div>
-                <div class="aspect-square bg-[url('https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?q=80&w=1000')] bg-cover bg-center fade-in" style="transition-delay: 0.4s"></div>
+
+            <!-- Gallery: 1 large + 2 tall -->
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+                <!-- Large left -->
+                <div class="gallery-item md:col-span-1 md:row-span-2 rounded-sm overflow-hidden" style="min-height: 480px;">
+                    <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=1000" alt="Dây cổ Glamorosa – góc nhìn chính diện" class="w-full h-full object-cover" style="height: 100%;">
+                    <div class="gallery-caption">
+                        <div>
+                            <div class="gallery-caption-text">Glamorosa — Góc Nhìn Chính</div>
+                            <div class="gallery-caption-sub">Vàng 18K · Đá quý tự nhiên</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Top right -->
+                <div class="gallery-item md:col-span-2 rounded-sm overflow-hidden" style="height: 280px;">
+                    <img src="https://images.unsplash.com/photo-1599643477877-530eb83abc8e?q=80&w=1200" alt="Trang sức Glamorosa – chi tiết nghệ thuật" class="w-full h-full object-cover">
+                    <div class="gallery-caption">
+                        <div>
+                            <div class="gallery-caption-text">Chi Tiết Nghệ Thuật</div>
+                            <div class="gallery-caption-sub">Từng cánh hoa được chạm khắc thủ công</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bottom right -->
+                <div class="gallery-item md:col-span-2 rounded-sm overflow-hidden" style="height: 280px;">
+                    <img src="https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?q=80&w=1200" alt="Glamorosa – phong cách dạ hội" class="w-full h-full object-cover">
+                    <div class="gallery-caption">
+                        <div>
+                            <div class="gallery-caption-text">Phong Cách Dạ Hội</div>
+                            <div class="gallery-caption-sub">Lấp lánh dưới ánh đèn</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-10 fade-in">
+                <a href="#consultation" class="inline-flex items-center gap-2 text-sm text-emerald uppercase tracking-widest border-b border-emerald pb-1 hover:text-champagne hover:border-champagne transition-colors">
+                    Đặt tư vấn để xem trực tiếp <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Craftsmanship -->
+    <!-- ======================== CRAFTSMANSHIP ======================== -->
     <section class="py-24 bg-emerald text-white">
         <div class="container mx-auto px-4 max-w-6xl">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                 <div class="order-2 md:order-1 space-y-8 fade-in">
                     <div>
+                        <p class="text-xs uppercase tracking-[0.2em] text-champagne mb-3">Tay Nghề</p>
                         <h2 class="text-3xl font-serif text-champagne-light mb-4">Tay Nghề Kim Hoàn Đỉnh Cao</h2>
-                        <div class="w-12 h-[1px] bg-champagne"></div>
+                        <div class="section-divider"></div>
                     </div>
                     
-                    <p class="text-lg font-light leading-relaxed opacity-90 font-light">
+                    <p class="text-base font-light leading-loose opacity-85">
                         Thuộc top nghệ nhân kim hoàn hàng đầu Việt Nam, đội ngũ CAO cần mẫn trong từng công đoạn: từ phác thảo cánh hoa, đính từng viên đá đến đánh bóng từng đường cong dây cổ.
                     </p>
                     
-                    <div class="grid grid-cols-2 gap-8 pt-8 border-t border-white/20">
+                    <div class="grid grid-cols-2 gap-6 pt-8 border-t border-white/15">
                         <div>
-                            <h4 class="text-champagne font-serif text-xl mb-2">Vàng 18K</h4>
-                            <p class="text-sm font-light opacity-80">Chất liệu cao cấp, tạo độ phản quang rực rỡ và bền bỉ.</p>
+                            <h4 class="text-champagne font-serif text-2xl mb-1">18K</h4>
+                            <p class="text-xs uppercase tracking-widest text-champagne/70 mb-2">Vàng Tinh Khiết</p>
+                            <p class="text-sm font-light opacity-70">75% vàng nguyên chất, tạo độ phản quang rực rỡ và bền bỉ theo năm tháng.</p>
                         </div>
                         <div>
-                            <h4 class="text-champagne font-serif text-xl mb-2">Đá Quý Tinh Tuyển</h4>
-                            <p class="text-sm font-light opacity-80">Tuyển chọn gắt gao theo tiêu chuẩn khắt khe, chứng nhận quốc tế.</p>
+                            <h4 class="text-champagne font-serif text-2xl mb-1">GIA</h4>
+                            <p class="text-xs uppercase tracking-widest text-champagne/70 mb-2">Chứng Nhận Quốc Tế</p>
+                            <p class="text-sm font-light opacity-70">Đá quý tuyển chọn gắt gao, đạt chuẩn chứng nhận quốc tế GIA.</p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="order-1 md:order-2 aspect-[4/3] bg-neutral-charcoal relative rounded-sm overflow-hidden fade-in" style="transition-delay: 0.2s">
-                    <!-- Placeholder ảnh craftsmanship -->
-                    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1589674781759-c21c37956a44?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-700"></div>
+                <div class="order-1 md:order-2 aspect-[4/3] bg-neutral-charcoal relative rounded-sm overflow-hidden fade-in group" style="transition-delay: 0.2s">
+                    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1589674781759-c21c37956a44?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105"></div>
+                    <div class="absolute inset-0 bg-emerald/20"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Styling Suggestions -->
+    <!-- ======================== STYLING SUGGESTIONS ======================== -->
     <section class="py-24 bg-white">
-        <div class="container mx-auto px-4 max-w-4xl text-center">
+        <div class="container mx-auto px-4 max-w-5xl text-center">
+            <p class="text-xs uppercase tracking-[0.2em] text-champagne mb-4">Phong Cách</p>
             <h2 class="text-3xl font-serif text-emerald-dark mb-4">Dấu Ấn Thanh Lịch Mọi Khoảnh Khắc</h2>
-            <div class="w-12 h-[1px] bg-champagne mx-auto mb-12"></div>
+            <div class="section-divider section-divider-center mb-10"></div>
             
-            <p class="text-lg text-neutral-charcoal/80 font-light max-w-2xl mx-auto mb-16 fade-in">
-                Ở văn phòng, thiết kế đủ thanh lịch để đồng hành cùng sơ mi và blazer thanh lịch; trong các đêm tiệc thượng lưu, sự kết hợp với đầm dạ hội trễ vai tôn vinh trọn vẹn vẻ kiêu kỳ cùng ánh sáng lấp lánh từ những viên kim cương và đá quý tinh tuyển.
+            <p class="text-base text-neutral-charcoal/70 font-light max-w-2xl mx-auto mb-14 leading-relaxed fade-in">
+                Ở văn phòng, thiết kế đủ thanh lịch để đồng hành cùng sơ mi và blazer; trong các đêm tiệc thượng lưu, sự kết hợp với đầm dạ hội trễ vai tôn vinh trọn vẹn vẻ kiêu kỳ cùng ánh lấp lánh từ kim cương tinh tuyển.
             </p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="aspect-[3/4] bg-neutral-warm relative group overflow-hidden fade-in">
-                    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center hover:scale-105 transition-transform duration-700"></div>
-                    <div class="absolute bottom-6 left-0 right-0 text-center z-10">
-                        <span class="bg-white/90 text-emerald-dark px-6 py-2 text-sm font-serif tracking-widest">BUSINESS CHIC</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                <div class="aspect-[3/4] bg-neutral-warm relative group overflow-hidden rounded-sm fade-in">
+                    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-emerald-dark/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 z-10">
+                        <span class="bg-white/95 text-emerald-dark px-6 py-2.5 text-xs font-sans font-medium tracking-[0.2em] uppercase shadow-sm">BUSINESS CHIC</span>
+                        <p class="text-white/90 text-sm mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 font-light">Thanh lịch trong mọi cuộc họp quan trọng</p>
                     </div>
                 </div>
-                <div class="aspect-[3/4] bg-neutral-warm relative group overflow-hidden fade-in md:translate-y-12" style="transition-delay: 0.2s">
-                    <div class="absolute inset-0 bg-[url('images/evening-elegance.jpg')] bg-cover bg-center hover:scale-105 transition-transform duration-700"></div>
-                    <div class="absolute bottom-6 left-0 right-0 text-center z-10">
-                        <span class="bg-white/90 text-emerald-dark px-6 py-2 text-sm font-serif tracking-widest">EVENING ELEGANCE</span>
+                <div class="aspect-[3/4] bg-neutral-warm relative group overflow-hidden rounded-sm fade-in md:translate-y-12" style="transition-delay: 0.2s">
+                    <div class="absolute inset-0 bg-[url('images/evening-elegance.jpg')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                         onerror="this.style.backgroundImage='url(https://robinsonsjewelers.com/cdn/shop/articles/Top_10_Jewelry_Looks_for_Evening_Glamour_20241104-ai_8eb4b98a-4f17-4da2-a143-27af7b43316a.jpg?v=1780833255&width=1200)'">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-emerald-dark/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 z-10">
+                        <span class="bg-white/95 text-emerald-dark px-6 py-2.5 text-xs font-sans font-medium tracking-[0.2em] uppercase shadow-sm">EVENING ELEGANCE</span>
+                        <p class="text-white/90 text-sm mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 font-light">Tỏa sáng tại mọi dạ tiệc thượng lưu</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Social Proof -->
-    <section class="py-24 bg-neutral-warm/30 border-y border-neutral-warm mt-12 md:mt-24">
-        <div class="container mx-auto px-4 max-w-4xl text-center fade-in">
-            <blockquote class="text-2xl md:text-3xl font-serif text-emerald-dark leading-relaxed mb-8">
-                "CAO Fine Jewellery – thương hiệu trang sức cao cấp hàng đầu Việt Nam, được yêu thích bởi sự kết hợp hoàn hảo giữa nét tinh tế phương Tây và vẻ đẹp truyền thống Á Đông."
-            </blockquote>
-            <div class="text-champagne font-bold tracking-widest uppercase text-sm">
-                — Tạp chí ELLE Vietnam —
+    <!-- ======================== SOCIAL PROOF ======================== -->
+    <section class="py-20 bg-neutral-warm/40 border-y border-champagne/20">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center mb-12 fade-in">
+                <p class="text-xs uppercase tracking-[0.2em] text-champagne mb-2">Được Tin Yêu</p>
+                <h2 class="text-2xl font-serif text-emerald-dark">Khách Hàng Nói Gì</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Main quote -->
+                <div class="md:col-span-1 testimonial-card fade-in">
+                    <div class="flex mb-3">
+                        <i class="fa-solid fa-star text-champagne text-xs"></i><i class="fa-solid fa-star text-champagne text-xs mx-0.5"></i><i class="fa-solid fa-star text-champagne text-xs"></i><i class="fa-solid fa-star text-champagne text-xs mx-0.5"></i><i class="fa-solid fa-star text-champagne text-xs"></i>
+                    </div>
+                    <p class="text-neutral-charcoal/80 font-light text-sm leading-relaxed mb-4 font-serif italic">
+                        "Sản phẩm tinh xảo, đúng với hình ảnh trên website. Tôi đã nhận được rất nhiều lời khen khi đeo tại buổi tiệc."
+                    </p>
+                    <p class="text-emerald text-xs font-medium tracking-wide uppercase">Nguyễn Minh Châu</p>
+                    <p class="text-champagne-dark text-xs opacity-70">Khách hàng VIP · Hà Nội</p>
+                </div>
+                <!-- ELLE quote -->
+                <div class="md:col-span-1 testimonial-card fade-in" style="transition-delay:0.15s">
+                    <div class="flex mb-3">
+                        <i class="fa-solid fa-star text-champagne text-xs"></i><i class="fa-solid fa-star text-champagne text-xs mx-0.5"></i><i class="fa-solid fa-star text-champagne text-xs"></i><i class="fa-solid fa-star text-champagne text-xs mx-0.5"></i><i class="fa-solid fa-star text-champagne text-xs"></i>
+                    </div>
+                    <p class="text-neutral-charcoal/80 font-light text-sm leading-relaxed mb-4 font-serif italic">
+                        "CAO Fine Jewellery – thương hiệu trang sức cao cấp hàng đầu Việt Nam, được yêu thích bởi sự kết hợp hoàn hảo giữa nét tinh tế phương Tây và vẻ đẹp Á Đông."
+                    </p>
+                    <p class="text-emerald text-xs font-medium tracking-wide uppercase">Tạp chí ELLE Vietnam</p>
+                    <p class="text-champagne-dark text-xs opacity-70">Báo chí · Truyền thông</p>
+                </div>
+                <!-- Customer 2 -->
+                <div class="md:col-span-1 testimonial-card fade-in" style="transition-delay:0.3s">
+                    <div class="flex mb-3">
+                        <i class="fa-solid fa-star text-champagne text-xs"></i><i class="fa-solid fa-star text-champagne text-xs mx-0.5"></i><i class="fa-solid fa-star text-champagne text-xs"></i><i class="fa-solid fa-star text-champagne text-xs mx-0.5"></i><i class="fa-solid fa-star text-champagne text-xs"></i>
+                    </div>
+                    <p class="text-neutral-charcoal/80 font-light text-sm leading-relaxed mb-4 font-serif italic">
+                        "Dịch vụ tư vấn cực kỳ chuyên nghiệp và tận tâm. Tôi cảm thấy như đang được phục vụ tại một boutique 5 sao."
+                    </p>
+                    <p class="text-emerald text-xs font-medium tracking-wide uppercase">Trần Thảo Linh</p>
+                    <p class="text-champagne-dark text-xs opacity-70">Khách hàng thân thiết · TP.HCM</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Close Section -->
-    <section class="py-24 bg-champagne-light text-center px-4">
-        <div class="max-w-3xl mx-auto fade-in">
-            <h2 class="text-3xl md:text-4xl font-serif text-emerald-dark mb-4">
-                Đã đến lúc chọn sắc hoa dành riêng cho bạn.
+    <!-- ======================== CLOSE / PRE-CTA SECTION ======================== -->
+    <section class="py-24 bg-gradient-to-br from-champagne-light to-champagne/60 text-center px-4">
+        <div class="max-w-2xl mx-auto fade-in">
+            <p class="text-xs uppercase tracking-[0.25em] text-emerald/60 mb-4">Chỉ Còn Vài Phiên Bản</p>
+            <h2 class="text-3xl md:text-4xl font-serif text-emerald-dark mb-6 leading-snug">
+                Đã đến lúc chọn sắc hoa<br>dành riêng cho bạn.
             </h2>
+            <p class="text-neutral-charcoal/70 font-light mb-8 leading-relaxed">
+                Đội ngũ tư vấn riêng của CAO sẽ giúp bạn tìm ra phiên bản Glamorosa hoàn hảo nhất — từ chất liệu, cỡ dây đến loại đá.
+            </p>
+            <a href="#consultation" class="inline-block cta-primary px-10 py-4 text-sm font-medium tracking-[0.1em] uppercase">
+                Đặt Lịch Tư Vấn Miễn Phí
+            </a>
         </div>
     </section>
 
-    <!-- Consultation Form -->
-    <section id="consultation" class="py-24 bg-neutral-warm border-b border-champagne/20">
-        <div class="container mx-auto px-4 max-w-3xl fade-in">
+    <!-- ======================== CONSULTATION FORM ======================== -->
+    <section id="consultation" class="py-24 bg-neutral-warm">
+        <div class="container mx-auto px-4 max-w-2xl fade-in">
             <div class="text-center mb-12">
+                <p class="text-xs uppercase tracking-[0.2em] text-champagne mb-4">Tư Vấn Riêng</p>
                 <h2 class="text-3xl font-serif text-emerald-dark mb-4">Đặt Lịch Tư Vấn Riêng</h2>
-                <div class="w-12 h-[1px] bg-champagne mx-auto mb-6"></div>
-                <p class="text-neutral-charcoal/80 font-light">Để lại thông tin, đội ngũ CAO sẽ liên hệ trong vòng 24 giờ để gợi ý phiên bản phù hợp nhất. Không bắt buộc mua hàng.</p>
+                <div class="section-divider section-divider-center mb-6"></div>
+                <p class="text-neutral-charcoal/70 font-light text-sm leading-relaxed">
+                    Để lại thông tin, đội ngũ CAO sẽ liên hệ trong vòng 24 giờ để gợi ý phiên bản phù hợp nhất.<br>
+                    <span class="text-emerald text-xs">✓ Miễn phí tư vấn &nbsp;·&nbsp; ✓ Không bắt buộc mua hàng</span>
+                </p>
             </div>
+
             <div id="form-container">
-                <form id="consultation-form" onsubmit="submitConsultationForm(event)" class="space-y-6 bg-white p-8 shadow-sm">
-                    <div class="grid md:grid-cols-3 gap-6">
-                        <div>
-                            <label class="block text-sm font-medium text-emerald-dark mb-2">Họ & Tên</label>
-                            <input name="fullname" required type="text" class="w-full p-4 bg-neutral-warm border border-transparent focus:border-champagne outline-none" placeholder="Nguyễn Văn A">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-emerald-dark mb-2">Số điện thoại</label>
-                            <input name="phone" required type="tel" class="w-full p-4 bg-neutral-warm border border-transparent focus:border-champagne outline-none" placeholder="0901234567">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-emerald-dark mb-2">Email</label>
-                            <input name="email" required type="email" class="w-full p-4 bg-neutral-warm border border-transparent focus:border-champagne outline-none" placeholder="nguyenvana@gmail.com">
-                        </div>
+                <form id="consultation-form" onsubmit="submitConsultationForm(event)" class="bg-white p-8 md:p-10 shadow-lg border-t-2 border-champagne space-y-5">
+                    <div class="form-input-wrap">
+                        <i class="fa-regular fa-user form-input-icon"></i>
+                        <input name="fullname" required type="text" class="form-input" placeholder="Họ & Tên của bạn">
                     </div>
-                    <div class="text-center pt-4">
-                        <button type="submit" class="px-12 py-4 bg-emerald text-white font-medium tracking-wide hover:bg-emerald-light transition-colors w-full sm:w-auto">Gửi Yêu Cầu Tư Vấn</button>
+                    <div class="form-input-wrap">
+                        <i class="fa-solid fa-phone form-input-icon"></i>
+                        <input name="phone" required type="tel" class="form-input" placeholder="Số điện thoại (VD: 0901 234 567)">
+                    </div>
+                    <div class="form-input-wrap">
+                        <i class="fa-regular fa-envelope form-input-icon"></i>
+                        <input name="email" required type="email" class="form-input" placeholder="Địa chỉ email">
+                    </div>
+
+                    <!-- Trust badges -->
+                    <div class="flex flex-wrap items-center justify-center gap-4 pt-2 pb-1">
+                        <span class="flex items-center gap-1.5 text-xs text-neutral-charcoal/50">
+                            <i class="fa-solid fa-shield-halved text-emerald text-xs"></i> Thông tin bảo mật
+                        </span>
+                        <span class="flex items-center gap-1.5 text-xs text-neutral-charcoal/50">
+                            <i class="fa-regular fa-clock text-emerald text-xs"></i> Phản hồi trong 24 giờ
+                        </span>
+                        <span class="flex items-center gap-1.5 text-xs text-neutral-charcoal/50">
+                            <i class="fa-solid fa-check text-emerald text-xs"></i> Miễn phí hoàn toàn
+                        </span>
+                    </div>
+
+                    <div class="text-center pt-2">
+                        <button type="submit" class="submit-btn w-full sm:w-auto">
+                            Gửi Yêu Cầu Tư Vấn
+                        </button>
                     </div>
                 </form>
             </div>
             
-            <div id="success-message" class="hidden p-8 bg-white text-center shadow-sm border border-champagne/30 fade-in">
-                <div id="qr-section">
-                    <h3 class="text-2xl font-serif text-emerald mb-4">Thanh Toán Đơn Hàng</h3>
-                    <p class="text-neutral-charcoal/80 mb-6">Vui lòng quét mã QR dưới đây để hoàn tất thanh toán.</p>
-                    <div class="bg-neutral-warm/30 p-6 rounded-lg shadow-sm border border-champagne/50 inline-block text-left mx-auto mb-6 max-w-sm w-full text-center">
-                        <img src="https://printgo.vn/uploads/media/790919/tao-ma-qr-code-san-pham-1_1620927223.jpg" alt="Mã QR Thanh Toán" class="mx-auto mb-4 w-full h-auto object-cover rounded" />
-                        <p class="text-neutral-charcoal mb-2 text-left"><span class="font-semibold">Mã đơn hàng:</span> <span id="success-order-id" class="text-emerald font-mono text-lg"></span></p>
-                        <p class="text-neutral-charcoal text-left"><span class="font-semibold">Số tiền thanh toán:</span> <span id="success-amount" class="text-emerald font-bold text-lg"></span></p>
-                        <p class="text-sm text-neutral-charcoal/70 mt-4 italic">* Vui lòng ghi chú mã đơn hàng khi chuyển khoản.</p>
+            <div id="success-message" class="hidden bg-white shadow-lg border-t-2 border-champagne">
+                <div id="qr-section" class="p-8 md:p-10 text-center">
+                    <div class="w-12 h-12 rounded-full bg-champagne/20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-qrcode text-champagne text-xl"></i>
                     </div>
-                    <div class="mt-4" id="payment-status">
-                        <p class="text-neutral-charcoal/80 font-medium" id="countdown-text">Đang chờ hệ thống tự động xác thực... (<span id="countdown-seconds">30</span>s)</p>
-                        <button id="btn-confirm-payment" onclick="confirmPayment()" class="hidden px-8 py-3 bg-emerald text-white font-medium tracking-wide hover:bg-emerald-light transition-colors rounded">
+                    <h3 class="text-2xl font-serif text-emerald mb-2">Thanh Toán Đơn Hàng</h3>
+                    <p class="text-neutral-charcoal/70 text-sm mb-6 font-light">Vui lòng quét mã QR dưới đây để hoàn tất thanh toán và kích hoạt lịch tư vấn của bạn.</p>
+                    <div class="bg-neutral-warm p-6 inline-block text-left mx-auto mb-6 max-w-xs w-full text-center rounded border border-champagne/30">
+                        <img src="https://printgo.vn/uploads/media/790919/tao-ma-qr-code-san-pham-1_1620927223.jpg" alt="Mã QR Thanh Toán CAO Fine Jewellery" class="mx-auto mb-5 w-full h-auto rounded" />
+                        <div class="space-y-2 text-left border-t border-champagne/30 pt-4">
+                            <p class="text-sm text-neutral-charcoal"><span class="font-medium text-emerald-dark">Mã đơn hàng:</span> <span id="success-order-id" class="font-mono text-emerald font-semibold"></span></p>
+                            <p class="text-sm text-neutral-charcoal"><span class="font-medium text-emerald-dark">Số tiền:</span> <span id="success-amount" class="text-emerald font-bold text-lg"></span></p>
+                        </div>
+                        <p class="text-xs text-neutral-charcoal/50 mt-3 italic">* Ghi nội dung chuyển khoản: Mã đơn hàng của bạn</p>
+                    </div>
+                    <div id="payment-status" class="mt-2">
+                        <p class="text-neutral-charcoal/60 text-sm" id="countdown-text">
+                            <i class="fa-solid fa-circle-notch fa-spin mr-1.5 text-champagne"></i>
+                            Đang chờ hệ thống xác thực... (<span id="countdown-seconds">30</span>s)
+                        </p>
+                        <button id="btn-confirm-payment" onclick="confirmPayment()" class="hidden mt-3 px-8 py-3 bg-emerald text-white text-sm font-medium tracking-wide hover:bg-emerald-light transition-colors">
                             Xác nhận đã chuyển khoản
                         </button>
                     </div>
                 </div>
                 
-                <div id="zalo-section" class="hidden">
-                    <h3 class="text-2xl font-serif text-emerald mb-4">Xác Nhận Thành Công</h3>
-                    <p class="text-neutral-charcoal/80 mb-6">Cảm ơn bạn đã thanh toán. Đội ngũ CAO sẽ sớm liên hệ để hỗ trợ bạn.</p>
-                    <a href="https://zalo.me/g/sdczb5ehiqm9tyimg1th" target="_blank" rel="noopener noreferrer" class="inline-block px-8 py-4 bg-[#0068FF] text-white font-medium tracking-wide hover:bg-[#0052CC] transition-colors rounded shadow">
+                <div id="zalo-section" class="hidden p-8 md:p-10 text-center">
+                    <div class="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-circle-check text-green-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif text-emerald mb-3">Xác Nhận Thành Công!</h3>
+                    <p class="text-neutral-charcoal/70 font-light text-sm mb-7">
+                        Cảm ơn bạn đã tin tưởng CAO Fine Jewellery.<br>Đội ngũ sẽ liên hệ sớm để xác nhận lịch tư vấn.
+                    </p>
+                    <a href="https://zalo.me/g/sdczb5ehiqm9tyimg1th" target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center gap-2 px-8 py-4 bg-[#0068FF] text-white font-medium tracking-wide hover:bg-[#0052CC] transition-colors shadow-lg">
+                        <i class="fa-brands fa-discord text-lg"></i>
                         Tham gia Group Zalo Hỗ Trợ
                     </a>
                 </div>
@@ -268,137 +573,222 @@
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="py-24 bg-neutral-warm/20">
-        <div class="container mx-auto px-4 max-w-3xl">
-            <h2 class="text-3xl font-serif text-emerald-dark text-center mb-12">Câu Hỏi Thường Gặp</h2>
+    <!-- ======================== FAQ ======================== -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-4 max-w-2xl">
+            <div class="text-center mb-12">
+                <p class="text-xs uppercase tracking-[0.2em] text-champagne mb-4">Hỏi & Đáp</p>
+                <h2 class="text-3xl font-serif text-emerald-dark">Câu Hỏi Thường Gặp</h2>
+            </div>
             
-            <div class="space-y-4">
-                <!-- FAQ Item 1 -->
-                <div class="border-b border-neutral-charcoal/10 pb-4 faq-item fade-in">
-                    <button class="w-full flex justify-between items-center py-4 text-left font-serif text-lg text-emerald focus:outline-none" onclick="toggleFaq(this)">
-                        <span>Thời gian đặt & nhận sản phẩm là bao lâu?</span>
-                        <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300 transform rotate-180"></i>
+            <div class="space-y-0 border-t border-neutral-charcoal/10">
+                <!-- FAQ Item 1 - open by default -->
+                <div class="border-b border-neutral-charcoal/10 faq-item fade-in">
+                    <button class="w-full flex justify-between items-center py-5 text-left font-serif text-lg text-emerald focus:outline-none group" onclick="toggleFaq(this)">
+                        <span class="group-hover:text-emerald-light transition-colors">Thời gian đặt &amp; nhận sản phẩm là bao lâu?</span>
+                        <i class="fa-solid fa-plus text-champagne text-sm transition-transform duration-300 flex-shrink-0 ml-4"></i>
                     </button>
-                    <div class="faq-answer overflow-hidden transition-all duration-300" style="max-height: 200px; opacity: 1;">
-                        <p class="pb-4 text-neutral-charcoal/70 font-light leading-relaxed font-light">
-                            Với các mẫu có sẵn, CAO hỗ trợ giao hoặc xem tại boutique ngay trong ngày. Đối với các yêu cầu tùy chỉnh độ dài hay thay đổi loại đá, thời gian chế tác dự kiến từ 7 - 14 ngày làm việc.
+                    <div class="faq-answer overflow-hidden transition-all duration-400 max-h-0 opacity-0">
+                        <p class="pb-5 text-neutral-charcoal/65 font-light leading-relaxed text-sm">
+                            Với các mẫu có sẵn, CAO hỗ trợ giao hoặc xem tại boutique ngay trong ngày. Đối với các yêu cầu tùy chỉnh độ dài hay thay đổi loại đá, thời gian chế tác dự kiến từ <strong class="font-medium text-emerald">7 – 14 ngày</strong> làm việc.
                         </p>
                     </div>
                 </div>
-
                 <!-- FAQ Item 2 -->
-                <div class="border-b border-neutral-charcoal/10 pb-4 faq-item fade-in" style="transition-delay: 0.1s">
-                    <button class="w-full flex justify-between items-center py-4 text-left font-serif text-lg text-emerald focus:outline-none" onclick="toggleFaq(this)">
-                        <span>Chính sách bảo hành và làm mới áp dụng như thế nào?</span>
-                        <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300 transform"></i>
+                <div class="border-b border-neutral-charcoal/10 faq-item fade-in" style="transition-delay: 0.1s">
+                    <button class="w-full flex justify-between items-center py-5 text-left font-serif text-lg text-emerald focus:outline-none group" onclick="toggleFaq(this)">
+                        <span class="group-hover:text-emerald-light transition-colors">Chính sách bảo hành và làm mới áp dụng như thế nào?</span>
+                        <i class="fa-solid fa-plus text-champagne text-sm transition-transform duration-300 flex-shrink-0 ml-4"></i>
                     </button>
-                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0 opacity-0">
-                        <p class="pb-4 text-neutral-charcoal/70 font-light leading-relaxed font-light">
-                            CAO áp dụng chính sách bảo hành, làm sạch và làm mới trang sức miễn phí trọn đời cho các dòng sản phẩm fine jewellery.
+                    <div class="faq-answer overflow-hidden transition-all duration-400 max-h-0 opacity-0">
+                        <p class="pb-5 text-neutral-charcoal/65 font-light leading-relaxed text-sm">
+                            CAO áp dụng chính sách <strong class="font-medium text-emerald">bảo hành, làm sạch và làm mới trang sức miễn phí trọn đời</strong> cho các dòng sản phẩm fine jewellery.
                         </p>
                     </div>
                 </div>
-
                 <!-- FAQ Item 3 -->
-                <div class="border-b border-neutral-charcoal/10 pb-4 faq-item fade-in" style="transition-delay: 0.2s">
-                    <button class="w-full flex justify-between items-center py-4 text-left font-serif text-lg text-emerald focus:outline-none" onclick="toggleFaq(this)">
-                        <span>Chính sách thu đổi áp dụng như thế nào?</span>
-                        <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300 transform"></i>
+                <div class="border-b border-neutral-charcoal/10 faq-item fade-in" style="transition-delay: 0.2s">
+                    <button class="w-full flex justify-between items-center py-5 text-left font-serif text-lg text-emerald focus:outline-none group" onclick="toggleFaq(this)">
+                        <span class="group-hover:text-emerald-light transition-colors">Chính sách thu đổi áp dụng như thế nào?</span>
+                        <i class="fa-solid fa-plus text-champagne text-sm transition-transform duration-300 flex-shrink-0 ml-4"></i>
                     </button>
-                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0 opacity-0">
-                        <p class="pb-4 text-neutral-charcoal/70 font-light leading-relaxed font-light">
-                            CAO áp dụng chế độ thu đổi linh hoạt riêng cho từng dòng sản phẩm. Vui lòng xem chi tiết tại trang Chế độ thu đổi trên website hoặc liên hệ tư vấn viên.
+                    <div class="faq-answer overflow-hidden transition-all duration-400 max-h-0 opacity-0">
+                        <p class="pb-5 text-neutral-charcoal/65 font-light leading-relaxed text-sm">
+                            CAO áp dụng chế độ thu đổi linh hoạt riêng cho từng dòng sản phẩm. Vui lòng liên hệ tư vấn viên để được hỗ trợ chi tiết.
                         </p>
                     </div>
                 </div>
-
                 <!-- FAQ Item 4 -->
-                <div class="border-b border-neutral-charcoal/10 pb-4 faq-item fade-in" style="transition-delay: 0.3s">
-                    <button class="w-full flex justify-between items-center py-4 text-left font-serif text-lg text-emerald focus:outline-none" onclick="toggleFaq(this)">
-                        <span>Tôi có thể yêu cầu khắc tên hoặc lời nhắn riêng không?</span>
-                        <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300 transform"></i>
+                <div class="border-b border-neutral-charcoal/10 faq-item fade-in" style="transition-delay: 0.3s">
+                    <button class="w-full flex justify-between items-center py-5 text-left font-serif text-lg text-emerald focus:outline-none group" onclick="toggleFaq(this)">
+                        <span class="group-hover:text-emerald-light transition-colors">Tôi có thể yêu cầu khắc tên hoặc lời nhắn riêng không?</span>
+                        <i class="fa-solid fa-plus text-champagne text-sm transition-transform duration-300 flex-shrink-0 ml-4"></i>
                     </button>
-                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0 opacity-0">
-                        <p class="pb-4 text-neutral-charcoal/70 font-light leading-relaxed font-light">
-                            Hoàn toàn có thể. Với dây cổ Glamorosa, nghệ nhân của CAO có thể chạm khắc lazer những thông điệp tinh tế ở vị trí kín đáo theo yêu cầu.
+                    <div class="faq-answer overflow-hidden transition-all duration-400 max-h-0 opacity-0">
+                        <p class="pb-5 text-neutral-charcoal/65 font-light leading-relaxed text-sm">
+                            Hoàn toàn có thể. Với dây cổ Glamorosa, nghệ nhân CAO có thể chạm khắc laser những thông điệp tinh tế ở vị trí kín đáo theo yêu cầu, làm nên một món quà đặc biệt không thể tìm thấy ở bất kỳ nơi nào khác.
+                        </p>
+                    </div>
+                </div>
+                <!-- FAQ Item 5 - NEW -->
+                <div class="border-b border-neutral-charcoal/10 faq-item fade-in" style="transition-delay: 0.4s">
+                    <button class="w-full flex justify-between items-center py-5 text-left font-serif text-lg text-emerald focus:outline-none group" onclick="toggleFaq(this)">
+                        <span class="group-hover:text-emerald-light transition-colors">Mức giá của Glamorosa là bao nhiêu?</span>
+                        <i class="fa-solid fa-plus text-champagne text-sm transition-transform duration-300 flex-shrink-0 ml-4"></i>
+                    </button>
+                    <div class="faq-answer overflow-hidden transition-all duration-400 max-h-0 opacity-0">
+                        <p class="pb-5 text-neutral-charcoal/65 font-light leading-relaxed text-sm">
+                            Giá của Glamorosa phụ thuộc vào phiên bản và cấu hình đá quý được chọn. Đội ngũ tư vấn sẽ trao đổi chi tiết về mức giá phù hợp với bạn trong buổi tư vấn riêng, hoàn toàn <strong class="font-medium text-emerald">miễn phí và không bắt buộc mua hàng</strong>.
                         </p>
                     </div>
                 </div>
             </div>
+
+            <!-- FAQ CTA -->
+            <div class="text-center mt-10 p-6 bg-neutral-warm rounded-sm fade-in">
+                <p class="text-sm text-neutral-charcoal/70 mb-3">Còn thắc mắc khác?</p>
+                <a href="#consultation" class="inline-flex items-center gap-2 text-sm text-emerald font-medium hover:text-emerald-light transition-colors">
+                    Chat ngay với tư vấn viên <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-emerald-dark text-white pt-20 pb-10 text-center">
-        <h3 class="font-serif text-2xl tracking-widest text-champagne mb-4">CAO FINE JEWELLERY</h3>
-        <p class="font-light opacity-80 mb-8">Khởi nguồn từ di sản kim hoàn Việt.</p>
-        <div class="text-sm opacity-60"><p>&copy; 2026 CAO Fine Jewellery. All rights reserved.</p></div>
+    <!-- ======================== FOOTER ======================== -->
+    <footer class="bg-emerald-dark text-white pt-16 pb-8">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 pb-12 border-b border-white/10">
+                <!-- Col 1: Brand -->
+                <div>
+                    <h3 class="font-serif text-2xl tracking-[0.2em] text-champagne mb-4">CAO FINE JEWELLERY</h3>
+                    <div class="section-divider mb-5"></div>
+                    <p class="font-light text-white/65 text-sm leading-relaxed mb-6">
+                        Khởi nguồn từ di sản kim hoàn Việt — nơi mỗi tác phẩm trang sức là một câu chuyện về vẻ đẹp, tình yêu và sự gắn kết.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center hover:border-champagne hover:text-champagne transition-colors">
+                            <i class="fa-brands fa-facebook-f text-xs"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center hover:border-champagne hover:text-champagne transition-colors">
+                            <i class="fa-brands fa-instagram text-xs"></i>
+                        </a>
+                        <a href="https://zalo.me/g/sdczb5ehiqm9tyimg1th" target="_blank" class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center hover:border-champagne hover:text-champagne transition-colors">
+                            <i class="fa-solid fa-comment-dots text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Col 2: Contact -->
+                <div>
+                    <h4 class="text-xs uppercase tracking-[0.2em] text-champagne mb-5">Liên Hệ</h4>
+                    <ul class="space-y-3 text-sm text-white/65 font-light">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot text-champagne mt-0.5 flex-shrink-0"></i>
+                            <span>123 Nguyễn Huệ, Q.1, TP. Hồ Chí Minh</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-champagne flex-shrink-0"></i>
+                            <a href="tel:+84901234567" class="hover:text-champagne transition-colors">0901 234 567</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-regular fa-envelope text-champagne flex-shrink-0"></i>
+                            <a href="mailto:hello@caojewellery.vn" class="hover:text-champagne transition-colors">hello@caojewellery.vn</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-regular fa-clock text-champagne flex-shrink-0"></i>
+                            <span>Thứ 2 – Thứ 7, 9:00 – 20:00</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Col 3: Policy & Nav -->
+                <div>
+                    <h4 class="text-xs uppercase tracking-[0.2em] text-champagne mb-5">Điều Hướng</h4>
+                    <ul class="space-y-3 text-sm text-white/65 font-light">
+                        <li><a href="#highlights" class="hover:text-champagne transition-colors">Thiết Kế & Bộ Sưu Tập</a></li>
+                        <li><a href="#gallery" class="hover:text-champagne transition-colors">Góc Nhìn Nghệ Thuật</a></li>
+                        <li><a href="#consultation" class="hover:text-champagne transition-colors">Đặt Lịch Tư Vấn</a></li>
+                        <li><a href="#" class="hover:text-champagne transition-colors">Chính Sách Bảo Mật</a></li>
+                        <li><a href="#" class="hover:text-champagne transition-colors">Điều Khoản Sử Dụng</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center pt-8 text-xs text-white/35">
+                <p>&copy; 2026 CAO Fine Jewellery. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
     <script>
+        // ========= Scroll observer (fade-in) =========
         document.addEventListener("DOMContentLoaded", function() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
                 });
-            }, { threshold: 0.1 });
-            
+            }, { threshold: 0.08 });
             document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
         });
 
+        // ========= Sticky Nav =========
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 60) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+
+        // ========= Mobile Menu =========
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('open');
+        }
+        function closeMobileMenu() {
+            document.getElementById('mobile-menu').classList.remove('open');
+        }
+
+        // ========= FAQ Toggle (plus/minus icon) =========
         function toggleFaq(button) {
             const answer = button.nextElementSibling;
             const icon = button.querySelector('i');
-            
-            // Close all other FAQs
+            const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+
+            // Close all
             document.querySelectorAll('.faq-answer').forEach(el => {
-                if (el !== answer) {
-                    el.style.maxHeight = null;
-                    el.classList.add('opacity-0');
-                    el.previousElementSibling.querySelector('i').classList.remove('rotate-180');
-                }
+                el.style.maxHeight = null;
+                el.classList.add('opacity-0');
+            });
+            document.querySelectorAll('.faq-item button i').forEach(i => {
+                i.classList.remove('rotate-45');
             });
 
-            // Toggle current
-            if (answer.style.maxHeight) {
-                answer.style.maxHeight = null;
-                answer.classList.add('opacity-0');
-                icon.classList.remove('rotate-180');
-            } else {
-                answer.style.maxHeight = answer.scrollHeight + "px";
+            // Open current if was closed
+            if (!isOpen) {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
                 answer.classList.remove('opacity-0');
-                icon.classList.add('rotate-180');
+                icon.classList.add('rotate-45');
             }
         }
 
+        // ========= Form Submit =========
         async function submitConsultationForm(event) {
             event.preventDefault();
             const form = event.target;
             const submitBtn = form.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
+            const originalText = submitBtn.innerHTML;
             
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Đang gửi...';
+            submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i>Đang gửi...';
 
             const formData = new FormData(form);
-            const fullname = formData.get('fullname');
-            const phone = formData.get('phone');
-            const email = formData.get('email');
-
             const generatedOrderId = "AI" + Math.floor(1000000000 + Math.random() * 9000000000).toString();
             const fixedAmount = "19.000đ";
 
             const data = {
-                name: fullname,
-                phone: phone,
-                email: email,
+                name: formData.get('fullname'),
+                phone: formData.get('phone'),
+                email: formData.get('email'),
                 payment: "Chưa thanh toán",
                 sendEmail: "Chờ gửi",
                 sendZalo: "Chờ gửi",
-                note: "Đăng ký từ trang Landing Page tĩnh",
+                note: "Đăng ký từ Landing Page",
                 orderId: generatedOrderId,
                 amount: fixedAmount
             };
@@ -406,24 +796,17 @@
             const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby7s63-QdXDGv_Ow_2MQ5A_TOSiv01ygYH654fpafcCs84rJNF0EXq3iJCh2BE4Fqc/exec';
 
             try {
-                // Sử dụng mode: "no-cors" và text/plain để tránh preflight OPTIONS từ trình duyệt
                 await fetch(APPS_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8'
-                    },
+                    method: 'POST', mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify(data)
                 });
                 
-                // Hiển thị thông báo thành công
                 document.getElementById('form-container').classList.add('hidden');
                 document.getElementById('success-order-id').innerText = generatedOrderId;
                 document.getElementById('success-amount').innerText = fixedAmount;
-                const successMessage = document.getElementById('success-message');
-                successMessage.classList.remove('hidden');
+                document.getElementById('success-message').classList.remove('hidden');
                 
-                // Logic đếm ngược 30s
                 let timeLeft = 30;
                 const countdownSpan = document.getElementById('countdown-seconds');
                 const countdownText = document.getElementById('countdown-text');
@@ -442,11 +825,11 @@
                 
                 form.reset();
             } catch (error) {
-                console.error('Lỗi gửi form:', error);
-                alert('Có lỗi xảy ra khi gửi yêu cầu. Vui lòng thử lại sau.');
+                console.error('Lỗi:', error);
+                alert('Có lỗi xảy ra. Vui lòng thử lại sau.');
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
+                submitBtn.innerHTML = originalText;
             }
         }
         
