@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 export default function ConsultationForm() {
@@ -8,6 +8,18 @@ export default function ConsultationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [orderInfo, setOrderInfo] = useState<{orderId: string, amount: string} | null>(null);
+  const [countdown, setCountdown] = useState(30);
+  const [paymentConfirmed, setPaymentConfirmed] = useState(false);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (submitted && !paymentConfirmed && countdown > 0) {
+      timer = setInterval(() => {
+        setCountdown((prev) => prev - 1);
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [submitted, paymentConfirmed, countdown]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -80,14 +92,42 @@ export default function ConsultationForm() {
             animate={{ opacity: 1 }}
             className="p-8 bg-neutral-warm text-center border border-champagne/30"
           >
-            <h3 className="text-2xl font-serif text-emerald mb-4">Gửi Yêu Cầu Thành Công</h3>
-            <p className="text-neutral-charcoal/80 mb-6">Yêu cầu tư vấn của bạn đã được tiếp nhận. Chuyên gia của CAO sẽ sớm liên hệ với bạn.</p>
-            {orderInfo && (
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-champagne/50 inline-block text-left mx-auto">
-                <p className="text-neutral-charcoal mb-2"><span className="font-semibold">Mã đơn hàng:</span> <span className="text-emerald font-mono text-lg">{orderInfo.orderId}</span></p>
-                <p className="text-neutral-charcoal mb-2"><span className="font-semibold">Số tiền thanh toán:</span> <span className="text-emerald font-bold text-lg">{orderInfo.amount}</span></p>
-                <p className="text-sm text-neutral-charcoal/70 mt-4 italic">* Vui lòng ghi chú mã đơn hàng khi chuyển khoản.</p>
-              </div>
+            {!paymentConfirmed ? (
+              <>
+                <h3 className="text-2xl font-serif text-emerald mb-4">Thanh Toán Đơn Hàng</h3>
+                <p className="text-neutral-charcoal/80 mb-6">Vui lòng quét mã QR dưới đây để hoàn tất thanh toán.</p>
+                
+                <div className="bg-white p-6 rounded-lg shadow-sm border border-champagne/50 inline-block text-left mx-auto mb-6 max-w-sm w-full text-center">
+                  <img src="https://printgo.vn/uploads/media/790919/tao-ma-qr-code-san-pham-1_1620927223.jpg" alt="Mã QR Thanh Toán" className="mx-auto mb-4 w-full h-auto object-cover rounded" />
+                  {orderInfo && (
+                    <>
+                      <p className="text-neutral-charcoal mb-2 text-left"><span className="font-semibold">Mã đơn hàng:</span> <span className="text-emerald font-mono text-lg">{orderInfo.orderId}</span></p>
+                      <p className="text-neutral-charcoal text-left"><span className="font-semibold">Số tiền:</span> <span className="text-emerald font-bold text-lg">{orderInfo.amount}</span></p>
+                    </>
+                  )}
+                  <p className="text-sm text-neutral-charcoal/70 mt-4 italic">* Vui lòng ghi chú mã đơn hàng khi chuyển khoản.</p>
+                </div>
+
+                <div className="mt-4">
+                  {countdown > 0 ? (
+                    <p className="text-neutral-charcoal/80 font-medium">Đang chờ hệ thống tự động xác thực... ({countdown}s)</p>
+                  ) : (
+                    <button 
+                      onClick={() => setPaymentConfirmed(true)}
+                      className="px-8 py-3 bg-emerald text-white font-medium tracking-wide hover:bg-emerald-light transition-colors rounded">
+                      Xác nhận đã chuyển khoản
+                    </button>
+                  )}
+                </div>
+              </>
+            ) : (
+              <>
+                <h3 className="text-2xl font-serif text-emerald mb-4">Xác Nhận Thành Công</h3>
+                <p className="text-neutral-charcoal/80 mb-6">Cảm ơn bạn đã thanh toán. Đội ngũ CAO sẽ sớm liên hệ để hỗ trợ bạn.</p>
+                <a href="https://zalo.me/g/sdczb5ehiqm9tyimg1th" target="_blank" rel="noopener noreferrer" className="inline-block px-8 py-4 bg-[#0068FF] text-white font-medium tracking-wide hover:bg-[#0052CC] transition-colors rounded shadow">
+                  Tham gia Group Zalo Hỗ Trợ
+                </a>
+              </>
             )}
           </motion.div>
         ) : (

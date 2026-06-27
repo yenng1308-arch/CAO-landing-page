@@ -240,12 +240,29 @@
             </div>
             
             <div id="success-message" class="hidden p-8 bg-white text-center shadow-sm border border-champagne/30 fade-in">
-                <h3 class="text-2xl font-serif text-emerald mb-4">Gửi Yêu Cầu Thành Công</h3>
-                <p class="text-neutral-charcoal/80 mb-6">Yêu cầu tư vấn của bạn đã được tiếp nhận. Chuyên gia của CAO sẽ sớm liên hệ với bạn.</p>
-                <div class="bg-neutral-warm/30 p-6 rounded-lg shadow-sm border border-champagne/50 inline-block text-left mx-auto">
-                    <p class="text-neutral-charcoal mb-2"><span class="font-semibold">Mã đơn hàng:</span> <span id="success-order-id" class="text-emerald font-mono text-lg"></span></p>
-                    <p class="text-neutral-charcoal mb-2"><span class="font-semibold">Số tiền thanh toán:</span> <span id="success-amount" class="text-emerald font-bold text-lg"></span></p>
-                    <p class="text-sm text-neutral-charcoal/70 mt-4 italic">* Vui lòng ghi chú mã đơn hàng khi chuyển khoản.</p>
+                <div id="qr-section">
+                    <h3 class="text-2xl font-serif text-emerald mb-4">Thanh Toán Đơn Hàng</h3>
+                    <p class="text-neutral-charcoal/80 mb-6">Vui lòng quét mã QR dưới đây để hoàn tất thanh toán.</p>
+                    <div class="bg-neutral-warm/30 p-6 rounded-lg shadow-sm border border-champagne/50 inline-block text-left mx-auto mb-6 max-w-sm w-full text-center">
+                        <img src="https://printgo.vn/uploads/media/790919/tao-ma-qr-code-san-pham-1_1620927223.jpg" alt="Mã QR Thanh Toán" class="mx-auto mb-4 w-full h-auto object-cover rounded" />
+                        <p class="text-neutral-charcoal mb-2 text-left"><span class="font-semibold">Mã đơn hàng:</span> <span id="success-order-id" class="text-emerald font-mono text-lg"></span></p>
+                        <p class="text-neutral-charcoal text-left"><span class="font-semibold">Số tiền thanh toán:</span> <span id="success-amount" class="text-emerald font-bold text-lg"></span></p>
+                        <p class="text-sm text-neutral-charcoal/70 mt-4 italic">* Vui lòng ghi chú mã đơn hàng khi chuyển khoản.</p>
+                    </div>
+                    <div class="mt-4" id="payment-status">
+                        <p class="text-neutral-charcoal/80 font-medium" id="countdown-text">Đang chờ hệ thống tự động xác thực... (<span id="countdown-seconds">30</span>s)</p>
+                        <button id="btn-confirm-payment" onclick="confirmPayment()" class="hidden px-8 py-3 bg-emerald text-white font-medium tracking-wide hover:bg-emerald-light transition-colors rounded">
+                            Xác nhận đã chuyển khoản
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="zalo-section" class="hidden">
+                    <h3 class="text-2xl font-serif text-emerald mb-4">Xác Nhận Thành Công</h3>
+                    <p class="text-neutral-charcoal/80 mb-6">Cảm ơn bạn đã thanh toán. Đội ngũ CAO sẽ sớm liên hệ để hỗ trợ bạn.</p>
+                    <a href="https://zalo.me/g/sdczb5ehiqm9tyimg1th" target="_blank" rel="noopener noreferrer" class="inline-block px-8 py-4 bg-[#0068FF] text-white font-medium tracking-wide hover:bg-[#0052CC] transition-colors rounded shadow">
+                        Tham gia Group Zalo Hỗ Trợ
+                    </a>
                 </div>
             </div>
         </div>
@@ -406,6 +423,23 @@
                 const successMessage = document.getElementById('success-message');
                 successMessage.classList.remove('hidden');
                 
+                // Logic đếm ngược 30s
+                let timeLeft = 30;
+                const countdownSpan = document.getElementById('countdown-seconds');
+                const countdownText = document.getElementById('countdown-text');
+                const btnConfirm = document.getElementById('btn-confirm-payment');
+                
+                const timer = setInterval(() => {
+                    timeLeft--;
+                    if (timeLeft > 0) {
+                        countdownSpan.innerText = timeLeft;
+                    } else {
+                        clearInterval(timer);
+                        countdownText.classList.add('hidden');
+                        btnConfirm.classList.remove('hidden');
+                    }
+                }, 1000);
+                
                 form.reset();
             } catch (error) {
                 console.error('Lỗi gửi form:', error);
@@ -414,6 +448,11 @@
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalText;
             }
+        }
+        
+        function confirmPayment() {
+            document.getElementById('qr-section').classList.add('hidden');
+            document.getElementById('zalo-section').classList.remove('hidden');
         }
     </script>
 </body>
