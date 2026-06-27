@@ -168,7 +168,7 @@
             <div class="w-12 h-[1px] bg-champagne mx-auto mb-12"></div>
             
             <p class="text-lg text-neutral-charcoal/80 font-light max-w-2xl mx-auto mb-16 fade-in">
-                Ở văn phòng, dây cổ đủ thanh lịch khi kết hợp với áo sơ mi trắng và blazer trung tính; trong tiệc tối, chỉ cần một chiếc đầm đen trễ vai là ánh sáng hoa đã đủ lên tiếng.
+                Ở văn phòng, thiết kế đủ thanh lịch để đồng hành cùng sơ mi và blazer thanh lịch; trong các đêm tiệc thượng lưu, sự kết hợp với đầm dạ hội trễ vai tôn vinh trọn vẹn vẻ kiêu kỳ cùng ánh sáng lấp lánh từ những viên kim cương và đá quý tinh tuyển.
             </p>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -179,7 +179,7 @@
                     </div>
                 </div>
                 <div class="aspect-[3/4] bg-neutral-warm relative group overflow-hidden fade-in md:translate-y-12" style="transition-delay: 0.2s">
-                    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1566958769312-82cef41d19ef?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center hover:scale-105 transition-transform duration-700"></div>
+                    <div class="absolute inset-0 bg-[url('images/evening-elegance.jpg')] bg-cover bg-center hover:scale-105 transition-transform duration-700"></div>
                     <div class="absolute bottom-6 left-0 right-0 text-center z-10">
                         <span class="bg-white/90 text-emerald-dark px-6 py-2 text-sm font-serif tracking-widest">EVENING ELEGANCE</span>
                     </div>
@@ -217,15 +217,19 @@
                 <div class="w-12 h-[1px] bg-champagne mx-auto mb-6"></div>
                 <p class="text-neutral-charcoal/80 font-light">Để lại thông tin, đội ngũ CAO sẽ liên hệ trong vòng 24 giờ để gợi ý phiên bản phù hợp nhất. Không bắt buộc mua hàng.</p>
             </div>
-            <form onsubmit="event.preventDefault(); alert('Cảm ơn bạn! Yêu cầu tư vấn đã được ghi nhận.');" class="space-y-6 bg-white p-8 shadow-sm">
-                <div class="grid md:grid-cols-2 gap-6">
+            <form onsubmit="submitConsultationForm(event)" class="space-y-6 bg-white p-8 shadow-sm">
+                <div class="grid md:grid-cols-3 gap-6">
                     <div>
                         <label class="block text-sm font-medium text-emerald-dark mb-2">Họ & Tên</label>
-                        <input required type="text" class="w-full p-4 bg-neutral-warm border border-transparent focus:border-champagne outline-none" placeholder="Nguyễn Văn A">
+                        <input name="fullname" required type="text" class="w-full p-4 bg-neutral-warm border border-transparent focus:border-champagne outline-none" placeholder="Nguyễn Văn A">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-emerald-dark mb-2">Số điện thoại</label>
-                        <input required type="tel" class="w-full p-4 bg-neutral-warm border border-transparent focus:border-champagne outline-none" placeholder="0901234567">
+                        <input name="phone" required type="tel" class="w-full p-4 bg-neutral-warm border border-transparent focus:border-champagne outline-none" placeholder="0901234567">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-emerald-dark mb-2">Email</label>
+                        <input name="email" required type="email" class="w-full p-4 bg-neutral-warm border border-transparent focus:border-champagne outline-none" placeholder="nguyenvana@gmail.com">
                     </div>
                 </div>
                 <div class="text-center pt-4">
@@ -338,6 +342,55 @@
                 answer.style.maxHeight = answer.scrollHeight + "px";
                 answer.classList.remove('opacity-0');
                 icon.classList.add('rotate-180');
+            }
+        }
+
+        async function submitConsultationForm(event) {
+            event.preventDefault();
+            const form = event.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Đang gửi...';
+
+            const formData = new FormData(form);
+            const fullname = formData.get('fullname');
+            const phone = formData.get('phone');
+            const email = formData.get('email');
+
+            const data = {
+                name: fullname,
+                phone: phone,
+                email: email,
+                payment: "Chưa thanh toán",
+                sendEmail: "Chờ gửi",
+                sendZalo: "Chờ gửi",
+                note: "Đăng ký từ trang Landing Page tĩnh"
+            };
+
+            // URL Apps Script Web App của bạn
+            const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxohDDtB6jcmrBfdXkJXgl1nK5HmGG86fgSOlmLSzi3GCJrAeDbaknNfT9_kZ6-sukn/exec';
+
+            try {
+                // Sử dụng mode: "no-cors" và text/plain để tránh preflight OPTIONS từ trình duyệt
+                await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'text/plain;charset=utf-8'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                alert('Cảm ơn bạn! Yêu cầu tư vấn đã được ghi nhận.');
+                form.reset();
+            } catch (error) {
+                console.error('Lỗi gửi form:', error);
+                alert('Có lỗi xảy ra khi gửi yêu cầu. Vui lòng thử lại sau.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
             }
         }
     </script>
